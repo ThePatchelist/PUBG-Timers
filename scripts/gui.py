@@ -1,28 +1,22 @@
 from Tkinter import *
-import ttk
 
+import os
 import threading
 import winsound
-import ctypes
-import win32con
 import webbrowser
 
 from scripts.tkinter_helpers import TkRepeatingTask
 
 
 class GUI(Tk):
-    def __init__(self, title):
+    def __init__(self, title, asset_path):
         Tk.__init__(self)
-        #user32 = ctypes.windll.user32
 
-        #if user32.RegisterHotKey(None, 1, win32con.MOD_SHIFT, ord("V")):
-            #print("hotkey registered")
-        #else:
-            #print("Cannot register hotkey")
+        self.asset_path = asset_path
 
         self.resizable(width=False, height=False)
         self.wm_title(title)
-        self.iconbitmap(r'F:\Development\Workspace\pubg_timer\assets\favicon.ico')
+        self.iconbitmap(os.path.join(self.asset_path, 'favicon.ico'))
 
         self.vcmd = (self.register(self.validate),
                 '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W')
@@ -163,7 +157,7 @@ class GUI(Tk):
             self.blue_entry_7.configure(fg="green", bg="black")
 
     def play_alarm_sound(self):
-        soundthread = threading.Thread(target=winsound.PlaySound, args=(r'F:\Development\Workspace\pubg_timer\assets\alarm.wav', winsound.SND_FILENAME))
+        soundthread = threading.Thread(target=winsound.PlaySound, args=(os.path.join(self.asset_path, 'alarm.wav'), winsound.SND_FILENAME))
         soundthread.start()
 
     def every_second(self):
