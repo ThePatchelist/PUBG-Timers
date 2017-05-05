@@ -26,6 +26,7 @@ This tool is pretty straight forward.
 
 - If you're using two or more monitors you can put the tool on your second screen, then ingame open the map/inventory and then move your mouse over and press the button without actually tabbing out of the game.
 - You can overwrite an existing already fired alarm by simply putting in a new number and hitting apply again.
+- You can change the "alert.wav" file to whatever you'd like as long as it stays a .wav file
 - Send your feedback via twitter to: http://www.twitter.com/ThePatchelist
 
 ##### Download
