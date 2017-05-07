@@ -3,7 +3,7 @@ import py2exe
 
 setup(
     name='pubg_timer',
-    version='1.0.0',
+    version='1.0.1',
     install_requires=['pypiwin32'],
     license='Copyright by ThePatchelist',
     windows=[{

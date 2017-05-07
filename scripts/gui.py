@@ -27,6 +27,8 @@ class GUI(Tk):
         self.lower_mid_frame = Frame(self)
         self.bottom_frame = Frame(self)
 
+        self.soundfile = 1
+
         self.prestart_label_string = StringVar()
 
         self.white_label_1_string = StringVar()
@@ -58,7 +60,7 @@ class GUI(Tk):
 
         self.state = "prestart"
 
-        self.prestart_label_timer  = 0 * 60
+        self.prestart_label_timer  = 2 * 60
         self.white_label_1_timer   = 5 * 60
         self.blue_label_1_timer    = 5 * 60
         self.white_label_2_timer   = 3 * 60 + 20
@@ -103,6 +105,8 @@ class GUI(Tk):
 
     def hotkey_received(self):
         if not self.running:
+            self.soundfile = 2
+            self.play_alarm_sound()
             self.running = True
             #print "hotkey received"
             self.timer.start()
@@ -110,6 +114,8 @@ class GUI(Tk):
 
     def apply_timers(self):
         self.button_1.configure(text="Timers Applied")
+        self.soundfile = 3
+        self.play_alarm_sound()
         if self.timer_variable == 1:
             self.radio_1.configure(fg="green", selectcolor="black", bg="black")
         if self.timer_variable == 2:
@@ -176,8 +182,22 @@ class GUI(Tk):
             self.blue_entry_7.configure(fg="green", bg="black")
 
     def play_alarm_sound(self):
-        soundthread = threading.Thread(target=winsound.PlaySound, args=(os.path.join(self.asset_path, 'alarm.wav'), winsound.SND_FILENAME))
-        soundthread.start()
+        if self.soundfile == 1:
+            soundthread = threading.Thread(target=winsound.PlaySound,
+                                           args=(os.path.join(self.asset_path, 'attention.wav'), winsound.SND_FILENAME))
+            soundthread.start()
+        if self.soundfile == 2:
+            soundthread = threading.Thread(target=winsound.PlaySound,
+                                           args=(os.path.join(self.asset_path, 'time_activated.wav'), winsound.SND_FILENAME))
+            soundthread.start()
+        if self.soundfile == 3:
+            soundthread = threading.Thread(target=winsound.PlaySound,
+                                           args=(os.path.join(self.asset_path, 'time_aquired.wav'), winsound.SND_FILENAME))
+            soundthread.start()
+        if self.soundfile == 4:
+            soundthread = threading.Thread(target=winsound.PlaySound,
+                                           args=(os.path.join(self.asset_path, 'fourty_five.wav'), winsound.SND_FILENAME))
+            soundthread.start()
 
     def every_second(self):
         if self.state == "prestart":
@@ -192,12 +212,15 @@ class GUI(Tk):
             self.white_label_1.configure(fg="green", bg="black")
             if self.timer_variable == 1:
                 if self.white_label_1_timer == self.white_stage1_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 2:
                 if self.white_label_1_timer == self.global_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 3:
-                if self.white_label_1_timer == 295:
+                if self.white_label_1_timer == 45:
+                    self.soundfile = 4
                     self.play_alarm_sound()
             if self.white_label_1_timer <= 0:
                 self.white_label_1.configure(fg="red")
@@ -208,12 +231,15 @@ class GUI(Tk):
             self.blue_label_1.configure(fg="green", bg="black")
             if self.timer_variable == 1:
                 if self.blue_label_1_timer == self.blue_stage1_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 2:
                 if self.blue_label_1_timer == self.global_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 3:
-                if self.blue_label_1_timer == 295:
+                if self.blue_label_1_timer == 45:
+                    self.soundfile = 4
                     self.play_alarm_sound()
             if self.blue_label_1_timer <= 0:
                 self.blue_label_1.configure(fg="red")
@@ -224,12 +250,15 @@ class GUI(Tk):
             self.white_label_2.configure(fg="green", bg="black")
             if self.timer_variable == 1:
                 if self.white_label_2_timer == self.white_stage2_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 2:
                 if self.white_label_2_timer == self.global_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 3:
-                if self.white_label_2_timer == 295:
+                if self.white_label_2_timer == 45:
+                    self.soundfile = 4
                     self.play_alarm_sound()
             if self.white_label_2_timer <= 0:
                 self.white_label_2.configure(fg="red")
@@ -240,12 +269,15 @@ class GUI(Tk):
             self.blue_label_2.configure(fg="green", bg="black")
             if self.timer_variable == 1:
                 if self.blue_label_2_timer == self.blue_stage2_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 2:
                 if self.blue_label_2_timer == self.global_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 3:
-                if self.blue_label_2_timer == 295:
+                if self.blue_label_2_timer == 45:
+                    self.soundfile = 4
                     self.play_alarm_sound()
             if self.blue_label_2_timer <= 0:
                 self.blue_label_2.configure(fg="red")
@@ -256,12 +288,15 @@ class GUI(Tk):
             self.white_label_3.configure(fg="green", bg="black")
             if self.timer_variable == 1:
                 if self.white_label_3_timer == self.white_stage3_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 2:
                 if self.white_label_3_timer == self.global_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 3:
-                if self.white_label_3_timer == 295:
+                if self.white_label_3_timer == 45:
+                    self.soundfile = 4
                     self.play_alarm_sound()
             if self.white_label_3_timer <= 0:
                 self.white_label_3.configure(fg="red")
@@ -272,12 +307,15 @@ class GUI(Tk):
             self.blue_label_3.configure(fg="green", bg="black")
             if self.timer_variable == 1:
                 if self.blue_label_3_timer == self.blue_stage3_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 2:
                 if self.blue_label_3_timer == self.global_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 3:
-                if self.blue_label_3_timer == 295:
+                if self.blue_label_3_timer == 45:
+                    self.soundfile = 4
                     self.play_alarm_sound()
             if self.blue_label_3_timer <= 0:
                 self.blue_label_3.configure(fg="red")
@@ -288,12 +326,15 @@ class GUI(Tk):
             self.white_label_4.configure(fg="green", bg="black")
             if self.timer_variable == 1:
                 if self.white_label_4_timer == self.white_stage4_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 2:
                 if self.white_label_4_timer == self.global_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 3:
-                if self.white_label_4_timer == 295:
+                if self.white_label_4_timer == 45:
+                    self.soundfile = 4
                     self.play_alarm_sound()
             if self.white_label_4_timer <= 0:
                 self.white_label_4.configure(fg="red")
@@ -304,12 +345,15 @@ class GUI(Tk):
             self.blue_label_4.configure(fg="green", bg="black")
             if self.timer_variable == 1:
                 if self.blue_label_4_timer == self.blue_stage4_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 2:
                 if self.blue_label_4_timer == self.global_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 3:
-                if self.blue_label_4_timer == 295:
+                if self.blue_label_4_timer == 45:
+                    self.soundfile = 4
                     self.play_alarm_sound()
             if self.blue_label_4_timer <= 0:
                 self.blue_label_4.configure(fg="red")
@@ -320,12 +364,15 @@ class GUI(Tk):
             self.white_label_5.configure(fg="green", bg="black")
             if self.timer_variable == 1:
                 if self.white_label_5_timer == self.white_stage5_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 2:
                 if self.white_label_5_timer == self.global_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 3:
-                if self.white_label_5_timer == 295:
+                if self.white_label_5_timer == 45:
+                    self.soundfile = 4
                     self.play_alarm_sound()
             if self.white_label_5_timer <= 0:
                 self.white_label_5.configure(fg="red")
@@ -336,12 +383,15 @@ class GUI(Tk):
             self.blue_label_5.configure(fg="green", bg="black")
             if self.timer_variable == 1:
                 if self.blue_label_5_timer == self.blue_stage5_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 2:
                 if self.blue_label_5_timer == self.global_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 3:
-                if self.blue_label_5_timer == 295:
+                if self.blue_label_5_timer == 45:
+                    self.soundfile = 4
                     self.play_alarm_sound()
             if self.blue_label_5_timer <= 0:
                 self.blue_label_5.configure(fg="red")
@@ -352,12 +402,15 @@ class GUI(Tk):
             self.white_label_6.configure(fg="green", bg="black")
             if self.timer_variable == 1:
                 if self.white_label_6_timer == self.white_stage6_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 2:
                 if self.white_label_6_timer == self.global_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 3:
-                if self.white_label_6_timer == 295:
+                if self.white_label_6_timer == 45:
+                    self.soundfile = 4
                     self.play_alarm_sound()
             if self.white_label_6_timer <= 0:
                 self.white_label_6.configure(fg="red")
@@ -368,12 +421,15 @@ class GUI(Tk):
             self.blue_label_6.configure(fg="green", bg="black")
             if self.timer_variable == 1:
                 if self.blue_label_6_timer == self.blue_stage6_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 2:
                 if self.blue_label_6_timer == self.global_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 3:
-                if self.blue_label_6_timer == 295:
+                if self.blue_label_6_timer == 45:
+                    self.soundfile = 4
                     self.play_alarm_sound()
             if self.blue_label_6_timer <= 0:
                 self.blue_label_6.configure(fg="red")
@@ -384,12 +440,15 @@ class GUI(Tk):
             self.white_label_7.configure(fg="green", bg="black")
             if self.timer_variable == 1:
                 if self.white_label_7_timer == self.white_stage7_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 2:
                 if self.white_label_7_timer == self.global_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 3:
-                if self.white_label_7_timer == 295:
+                if self.white_label_7_timer == 45:
+                    self.soundfile = 4
                     self.play_alarm_sound()
             if self.white_label_7_timer <= 0:
                 self.white_label_7.configure(fg="red")
@@ -400,12 +459,16 @@ class GUI(Tk):
             self.blue_label_7.configure(fg="green", bg="black")
             if self.timer_variable == 1:
                 if self.blue_label_7_timer == self.blue_stage7_alarm_offset:
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 2:
                 if self.blue_label_7_timer == self.global_alarm_offset:
+                    self.soundfile = 1
+                    self.soundfile = 1
                     self.play_alarm_sound()
             if self.timer_variable == 3:
-                if self.blue_label_7_timer == 295:
+                if self.blue_label_7_timer == 45:
+                    self.soundfile = 4
                     self.play_alarm_sound()
             if self.blue_label_7_timer <= 0:
                 self.blue_label_7.configure(fg="red")
