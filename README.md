@@ -32,7 +32,7 @@ This tool is pretty straight forward.
 
 ##### Download
 
-[Download PUBG-Timers here](https://github.com/ThePatchelist/PUBG-Timers/releases/download/v1.0.0/PUBGTimer-1.0.0.zip)
+[Download PUBG-Timers v1.0.1 here](https://github.com/ThePatchelist/PUBG-Timers/releases/download/v1.0.1/PUBGTimer-1.0.1.zip)
 
 ### Known Issues
 

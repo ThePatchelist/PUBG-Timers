@@ -15,6 +15,6 @@ setup(
                         'bundle_files': 1
                         },
              },
-    data_files=[("assets", ["assets/favicon.ico", "assets/alarm.wav"])],
+    data_files=[("assets", ["assets/favicon.ico", "assets/attention.wav", "assets/fourty_five.wav", "assets/time_aquired.wav", "assets/time_activated.wav"])],
     zipfile=None
 )
