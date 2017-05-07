@@ -21,7 +21,7 @@ This tool is pretty straight forward.
 - The first timer is the prestart timer. When it finishes, the first white circle should appear.
 - The other timers will count down one after another - If you have set up a notification time, you will hear an alarm sound when the timer reaches it.
 
-![alt text](https://i.imgur.com/LTzwTlC.png "Program Interface")
+![alt text](https://i.imgur.com/ylV8vuk.png "Program Interface")
 
 ##### Info
 
